@@ -1,7 +1,13 @@
 # Jetons CI/CD par dépôt : ce que la page propose
 
+![L'écran actuel et la proposition côte à côte](docs/before-after.png)
+
 Ce document est ta fiche de lecture. Le dépôt lui-même reste en anglais, c'est
 lui que tu enverras à HeroUI.
+
+Le visuel comparatif et la vidéo de 13 secondes sont produits par un projet
+Remotion séparé, dans `~/Documents/Dev/web/heroui-tokens-motion`. Les captures
+y sont prises par Playwright en 2x sur les deux routes, puis composées.
 
 ## Ce qui coince aujourd'hui
 

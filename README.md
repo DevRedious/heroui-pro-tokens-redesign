@@ -1,5 +1,7 @@
 # Scoped CI/CD tokens — a proposal for the HeroUI Pro dashboard
 
+![Today's CI/CD section next to the proposed one](docs/before-after.png)
+
 A working redesign of `heroui.pro/dashboard/pro/tokens`, built entirely with
 `@heroui/react` and `@heroui-pro/react`.
 
