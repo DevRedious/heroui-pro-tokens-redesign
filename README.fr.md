@@ -51,6 +51,26 @@ revient pas : il faut en créer un autre.
 Débrancher un fournisseur demande aussi une confirmation, avec le nombre de
 jetons qui cesseront de fonctionner.
 
+## Le passage à l'échelle
+
+Un jeton par dépôt, ça se multiplie vite : un compte qui adopte le principe se
+retrouve avec des dizaines de jetons. La démo en contient quarante, et l'écran
+est construit pour ce volume.
+
+La recherche porte sur le nom du jeton et sur ses dépôts. Répondre à « quel
+jeton atteint encore `acme-studio/storefront` ? » demande une requête, pas un
+défilement.
+
+La liste pagine par cinq, avec un récapitulatif « 1-5 of 40 tokens ».
+
+Un jeton couvrant beaucoup de dépôts affiche quatre puces et un compteur. Le
+compteur ouvre la liste complète dans une modale, groupée par fournisseur, ce
+qui garde une hauteur de carte identique qu'il y ait un dépôt ou dix-neuf.
+
+Le sélecteur permet de cocher d'un coup tous les résultats de la recherche,
+parce que rattacher un jeton à toute une plateforme ne doit pas coûter dix-neuf
+clics.
+
 ## Lancer le projet
 
 ```bash
@@ -58,7 +78,8 @@ poddock sites start ~/Documents/Dev/web/heroui-tokens-proposal
 ```
 
 Le port 3010 est déjà réservé pour ce projet. Le site répond sur
-<http://localhost:3010>.
+<http://localhost:3010>. La racine montre la proposition, `/before` reconstruit
+l'écran actuel avec les mêmes composants pour comparer à conditions égales.
 
 L'installation de `@heroui-pro/react` passe par ta licence HeroUI Pro. Le paquet
 récupère les composants au postinstall, et pnpm doit y être autorisé : c'est le
@@ -80,8 +101,10 @@ dans le dépôt.
 | --- | --- |
 | `src/app/page.tsx` | La coquille du tableau de bord, barre latérale comprise |
 | `src/components/tokens/tokens-view.tsx` | L'état de la page et son agencement |
+| `src/components/tokens/scoped-token-list.tsx` | La recherche, la pagination, les états vides |
 | `src/components/tokens/personal-token-card.tsx` | Le jeton personnel, inchangé |
 | `src/components/tokens/scoped-token-card.tsx` | Un jeton CI/CD et sa portée |
+| `src/components/tokens/repository-scope-list.tsx` | Les puces de portée et la modale complète |
 | `src/components/tokens/token-scope-dialog.tsx` | Créer un jeton, ou modifier sa portée |
 | `src/components/tokens/reset-token-dialog.tsx` | La réinitialisation en deux temps |
 | `src/components/tokens/revoke-token-dialog.tsx` | La révocation en deux temps |

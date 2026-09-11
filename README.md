@@ -36,12 +36,29 @@ Both destructive actions take two deliberate steps: reset asks for an explicit
 acknowledgement, revoke asks the user to type the token name. Each dialog names
 what stops working, and which repositories lose access.
 
+## At scale
+
+Per-repository tokens multiply: a workspace that adopts them ends up with
+dozens. The demo ships forty, and the screen is built for that number.
+
+- The list **searches by token name and by repository**, so "which token still
+  reaches `acme-studio/storefront`?" takes one query instead of a scroll.
+- It **pages at five cards**, with a summary reading `1-5 of 40 tokens`.
+- A token scoped to many repositories shows **four chips and a counter**; the
+  counter opens the full list, grouped by provider, in a modal. Cards keep a
+  fixed height whether a token covers one repository or nineteen.
+- The picker **selects every search match at once**, because scoping a token to
+  a whole platform should not mean nineteen clicks.
+
 ## Running it
 
 ```bash
 pnpm install
 pnpm dev
 ```
+
+`/` is the proposal. `/before` rebuilds today's screen with the same components,
+so both can be compared under identical conditions.
 
 `@heroui-pro/react` requires a HeroUI Pro license: run `npx heroui-pro login`
 before installing, or set `HEROUI_AUTH_TOKEN` in CI.
@@ -64,8 +81,10 @@ once.
 | --- | --- |
 | `src/app/page.tsx` | Dashboard shell: sidebar plus the tokens screen |
 | `src/components/tokens/tokens-view.tsx` | Page state and layout |
+| `src/components/tokens/scoped-token-list.tsx` | Search, paging, empty states |
 | `src/components/tokens/personal-token-card.tsx` | Personal token, unchanged |
 | `src/components/tokens/scoped-token-card.tsx` | One CI/CD token and its scope |
+| `src/components/tokens/repository-scope-list.tsx` | Scope chips, and the full list modal |
 | `src/components/tokens/token-scope-dialog.tsx` | Create a token, or edit its scope |
 | `src/components/tokens/reset-token-dialog.tsx` | Two-step secret rotation |
 | `src/components/tokens/revoke-token-dialog.tsx` | Two-step deletion |
@@ -76,8 +95,8 @@ once.
 ## Components used
 
 `@heroui/react`: AlertDialog, Avatar, Button, Card, Checkbox, CheckboxGroup,
-Chip, Description, Input, InputGroup, Label, Link, Modal, Separator, TextField,
-Toast.
+Chip, Description, Input, InputGroup, Label, Link, Modal, Pagination, Separator,
+TextField, Toast.
 
 `@heroui-pro/react`: Sidebar, EmptyState.
 

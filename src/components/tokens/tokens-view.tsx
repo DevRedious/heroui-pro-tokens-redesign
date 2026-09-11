@@ -1,13 +1,12 @@
 "use client";
 
-import { Key, Plus } from "@gravity-ui/icons";
+import { Plus } from "@gravity-ui/icons";
 import { Button, toast } from "@heroui/react";
-import { EmptyState } from "@heroui-pro/react";
 import { useState } from "react";
 
 import { ConnectedAccountsCard } from "@/components/tokens/connected-accounts-card";
 import { PersonalTokenCard } from "@/components/tokens/personal-token-card";
-import { ScopedTokenCard } from "@/components/tokens/scoped-token-card";
+import { ScopedTokenList } from "@/components/tokens/scoped-token-list";
 import { TokenScopeDialog } from "@/components/tokens/token-scope-dialog";
 import {
   DEMO_CONNECTIONS,
@@ -162,46 +161,16 @@ export function TokensView() {
           onDisconnect={disconnectProvider}
         />
 
-        {tokens.length === 0 ? (
-          <EmptyState className="rounded-2xl border border-dashed border-border">
-            <EmptyState.Header>
-              <EmptyState.Media variant="icon">
-                <Key />
-              </EmptyState.Media>
-              <EmptyState.Title>No CI/CD token yet</EmptyState.Title>
-              <EmptyState.Description>
-                Create a token scoped to the repositories whose pipelines install HeroUI
-                Pro.
-              </EmptyState.Description>
-            </EmptyState.Header>
-            <EmptyState.Content>
-              <TokenScopeDialog
-                connections={connections}
-                mode="create"
-                repositories={repositories}
-                onSubmit={createToken}
-              >
-                <Button size="sm">
-                  <Plus className="size-4" />
-                  New token
-                </Button>
-              </TokenScopeDialog>
-            </EmptyState.Content>
-          </EmptyState>
-        ) : (
-          tokens.map((token) => (
-            <ScopedTokenCard
-              key={token.id}
-              connections={connections}
-              now={DEMO_NOW}
-              repositories={repositories}
-              token={token}
-              onEditScope={(repositoryIds) => editScope(token.id, repositoryIds)}
-              onReset={() => resetToken(token.id)}
-              onRevoke={() => revokeToken(token.id)}
-            />
-          ))
-        )}
+        <ScopedTokenList
+          connections={connections}
+          now={DEMO_NOW}
+          repositories={repositories}
+          tokens={tokens}
+          onCreate={createToken}
+          onEditScope={editScope}
+          onReset={resetToken}
+          onRevoke={revokeToken}
+        />
 
         <p className="text-xs text-muted">
           Each token authenticates only for the repositories listed on its card. Revoking

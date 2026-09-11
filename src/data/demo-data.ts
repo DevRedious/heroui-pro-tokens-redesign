@@ -183,7 +183,7 @@ export const DEMO_CONNECTIONS: ProviderConnection[] = [
   },
 ];
 
-export const DEMO_TOKENS: ScopedToken[] = [
+const FEATURED_TOKENS: ScopedToken[] = [
   {
     id: "token-storefront",
     name: "Storefront deploys",
@@ -236,4 +236,50 @@ export const DEMO_TOKENS: ScopedToken[] = [
  * Fixed on purpose: the fixtures must render identically on the server and in
  * the browser, and a demo should not drift as time passes.
  */
+/**
+ * Fills the list up to a realistic worst case.
+ *
+ * A workspace that adopts per-repository tokens ends up with dozens of them,
+ * which is exactly the size the list has to stay usable at. Values are derived
+ * from the index rather than randomised, so the fixtures render identically on
+ * the server and in the browser.
+ */
+function buildFillerTokens(count: number): ScopedToken[] {
+  const names = [
+    "Preview deploys",
+    "E2E suite",
+    "Release pipeline",
+    "Nightly audit",
+    "Storybook build",
+    "Docs deploy",
+    "Lighthouse run",
+    "Bundle report",
+  ];
+
+  return Array.from({ length: count }, (_, index) => {
+    const repository = DEMO_REPOSITORIES[index % DEMO_REPOSITORIES.length];
+    const suffix =
+      index % DEMO_REPOSITORIES.length === index ? "" : ` ${Math.floor(index / 8) + 2}`;
+
+    return {
+      id: `token-filler-${index}`,
+      name: `${repository.name} · ${names[index % names.length]}${suffix}`,
+      secret: `d${(index + 11).toString(16).padStart(3, "0")}7f42c8ab135e${(index * 7 + 3)
+        .toString(16)
+        .padStart(4, "0")}9c`,
+      createdAt: new Date(
+        Date.UTC(2026, 4 + (index % 4), 2 + (index % 26), 9, 15),
+      ).toISOString(),
+      lastUsedAt:
+        index % 9 === 0
+          ? null
+          : new Date(Date.UTC(2026, 8, 1 + (index % 10), 6, 30)).toISOString(),
+      repositoryIds: [repository.id],
+    };
+  });
+}
+
+/** Three hand-written cases, then enough filler to need pagination. */
+export const DEMO_TOKENS: ScopedToken[] = [...FEATURED_TOKENS, ...buildFillerTokens(37)];
+
 export const DEMO_NOW = new Date("2026-09-11T12:00:00.000Z");
