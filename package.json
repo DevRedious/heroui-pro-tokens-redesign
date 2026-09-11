@@ -3,13 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --port 3010 #",
+    "dev": "next dev --port 3010",
     "build": "next build",
     "start": "next start",
     "lint": "biome lint .",
     "format": "biome format --write .",
     "check": "biome check --write .",
-    "types": "tsc --noEmit"
+    "types": "tsc --noEmit",
+    "check:ci": "biome ci .",
+    "check:fix": "biome check --write --unsafe ."
   },
   "dependencies": {
     "@gravity-ui/icons": "^2.22.0",

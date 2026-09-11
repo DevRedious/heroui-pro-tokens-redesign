@@ -5,6 +5,21 @@
 A working redesign of `heroui.pro/dashboard/pro/tokens`, built entirely with
 `@heroui/react` and `@heroui-pro/react`.
 
+## Watch it instead of deploying it
+
+There is no hosted demo on purpose. A build of this repository bundles
+`@heroui-pro/react`, which is yours under a commercial license, so putting it
+online would publish your code. Two recordings stand in for the clickable demo,
+and the repository runs locally in two commands.
+
+- [**The walkthrough**](docs/promo.mp4) — creating a token, scoping it to
+  repositories, editing the scope, rotating and revoking the secret.
+- [**The comparison**](docs/comparison.mp4) — today's screen and the proposed one,
+  side by side.
+
+Both play in GitHub's file view. They are rendered from a separate Remotion
+project, from Playwright captures of the two routes in this repository.
+
 ## The problem
 
 The dashboard issues exactly two tokens per account: one personal token, and one
