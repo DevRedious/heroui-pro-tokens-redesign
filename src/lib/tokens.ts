@@ -69,3 +69,29 @@ export function formatCreatedAt(isoDate: string): string {
     year: "numeric",
   });
 }
+
+/**
+ * Human-readable scope, short enough for a confirmation sentence.
+ *
+ * A token can cover twenty repositories; naming all of them in a dialog would
+ * bury the sentence that matters.
+ */
+export function summarizeScope(repositories: Repository[], maxNames = 2): string {
+  const names = repositories.map(repositorySlug);
+
+  if (names.length === 0) {
+    return "no repository";
+  }
+
+  if (names.length <= maxNames) {
+    return names.length === 1
+      ? names[0]
+      : `${names.slice(0, -1).join(", ")} and ${names.at(-1)}`;
+  }
+
+  const remaining = names.length - maxNames;
+
+  return `${names.slice(0, maxNames).join(", ")} and ${remaining} more repositor${
+    remaining === 1 ? "y" : "ies"
+  }`;
+}

@@ -1,9 +1,9 @@
 "use client";
 
 import { ArrowsRotateLeft, Pencil, TrashBin } from "@gravity-ui/icons";
-import { Button, Card, Chip } from "@heroui/react";
+import { Button, Card } from "@heroui/react";
 
-import { ProviderIcon } from "@/components/icons/provider-icons";
+import { RepositoryScopeList } from "@/components/tokens/repository-scope-list";
 import { ResetTokenDialog } from "@/components/tokens/reset-token-dialog";
 import { RevokeTokenDialog } from "@/components/tokens/revoke-token-dialog";
 import { SecretField } from "@/components/tokens/secret-field";
@@ -12,7 +12,7 @@ import {
   findRepositories,
   formatCreatedAt,
   formatLastUsed,
-  repositorySlug,
+  summarizeScope,
 } from "@/lib/tokens";
 import type { ProviderConnection, Repository, ScopedToken } from "@/lib/types";
 
@@ -37,21 +37,14 @@ export function ScopedTokenCard({
   token,
 }: ScopedTokenCardProps) {
   const scopedRepositories = findRepositories(repositories, token.repositoryIds);
-  const scopeSummary = scopedRepositories.map(repositorySlug).join(", ");
+  const scopeSummary = summarizeScope(scopedRepositories);
 
   return (
     <Card>
       <Card.Header className="flex-row items-start justify-between gap-4">
         <div className="flex min-w-0 flex-col gap-2">
           <Card.Title>{token.name}</Card.Title>
-          <div className="flex flex-wrap gap-2">
-            {scopedRepositories.map((repository) => (
-              <Chip key={repository.id} size="sm" variant="secondary">
-                <ProviderIcon className="size-3.5" provider={repository.provider} />
-                <Chip.Label>{repositorySlug(repository)}</Chip.Label>
-              </Chip>
-            ))}
-          </div>
+          <RepositoryScopeList repositories={scopedRepositories} tokenName={token.name} />
         </div>
         <div className="flex shrink-0 items-center gap-2">
           <TokenScopeDialog
@@ -102,7 +95,9 @@ export function ScopedTokenCard({
       </Card.Content>
       <Card.Footer>
         <p className="text-xs text-muted">
-          Created {formatCreatedAt(token.createdAt)} · {formatLastUsed(token, now)}
+          {scopedRepositories.length} repositor
+          {scopedRepositories.length === 1 ? "y" : "ies"} ·{" "}
+          {formatCreatedAt(token.createdAt)} · {formatLastUsed(token, now)}
         </p>
       </Card.Footer>
     </Card>

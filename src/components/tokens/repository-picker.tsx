@@ -1,7 +1,14 @@
 "use client";
 
 import { Magnifier } from "@gravity-ui/icons";
-import { Checkbox, CheckboxGroup, Chip, InputGroup, TextField } from "@heroui/react";
+import {
+  Button,
+  Checkbox,
+  CheckboxGroup,
+  Chip,
+  InputGroup,
+  TextField,
+} from "@heroui/react";
 import { useMemo, useState } from "react";
 
 import { ProviderIcon } from "@/components/icons/provider-icons";
@@ -46,6 +53,13 @@ export function RepositoryPicker({
       );
   }, [connections, query, repositories]);
 
+  /** Adds every repository matching the current search to the selection. */
+  const selectAllVisible = () => {
+    const visibleIds = visibleRepositories.map((repository) => repository.id);
+
+    onChange([...new Set([...value, ...visibleIds])]);
+  };
+
   const disconnectedProviders = connections.filter(
     (connection) => connection.account === null,
   );
@@ -60,6 +74,29 @@ export function RepositoryPicker({
           <InputGroup.Input placeholder="Search repositories" />
         </InputGroup>
       </TextField>
+
+      {/* Scoping a token to a whole platform means nineteen checkboxes, so the
+          search doubles as a bulk selector. */}
+      <div className="flex items-center gap-1">
+        <Button
+          className="h-6 px-2 text-xs"
+          isDisabled={visibleRepositories.length === 0}
+          size="sm"
+          variant="ghost"
+          onPress={selectAllVisible}
+        >
+          {query.trim().length > 0 ? "Select matches" : "Select all"}
+        </Button>
+        <Button
+          className="h-6 px-2 text-xs"
+          isDisabled={value.length === 0}
+          size="sm"
+          variant="ghost"
+          onPress={() => onChange([])}
+        >
+          Clear
+        </Button>
+      </div>
 
       <CheckboxGroup
         aria-label="Repositories in scope"
