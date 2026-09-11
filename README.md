@@ -1,4 +1,30 @@
-# Scoped CI/CD tokens — a proposal for the HeroUI Pro dashboard
+<div align="center">
+  <img src="public/heroui-pro-icon.png" alt="HeroUI Pro logo" width="200">
+
+  <p align="center">
+    <img src="https://img.shields.io/badge/Next.js-16.3.4-000000?logo=nextdotjs&amp;logoColor=white" alt="Next.js 16.3.4">
+    <img src="https://img.shields.io/badge/React-19.2.8-149ECA?logo=react&amp;logoColor=white" alt="React 19.2.8">
+    <img src="https://img.shields.io/badge/TypeScript-5.9-3178C6?logo=typescript&amp;logoColor=white" alt="TypeScript 5.9">
+    <img src="https://img.shields.io/badge/HeroUI-v3.2.5%20%2B%20Pro%201.0.0--beta.8-7C3AED" alt="HeroUI v3.2.5 plus Pro 1.0.0-beta.8">
+    <img src="https://img.shields.io/badge/Tailwind%20CSS-4.3-06B6D4?logo=tailwindcss&amp;logoColor=white" alt="Tailwind CSS 4.3">
+    <img src="https://img.shields.io/badge/Biome-2.5-60A5FA?logo=biome&amp;logoColor=white" alt="Biome 2.5">
+  </p>
+
+  <p align="center">
+    <a href="docs/promo.mp4"><img src="https://img.shields.io/badge/Walkthrough-30s-1F2937" alt="Thirty-second walkthrough"></a>
+    <a href="docs/comparison.mp4"><img src="https://img.shields.io/badge/Before%20%2F%20After-13s-1F2937" alt="Thirteen-second comparison"></a>
+    <img src="https://img.shields.io/badge/Hosted%20demo-none%20by%20design-6B7280" alt="No hosted demo, by design">
+  </p>
+
+  <p align="center">
+    <i>Scoped CI/CD tokens for the HeroUI Pro dashboard: one token per repository,
+    instead of one token for everything.</i><br>
+    Repository <a href="https://github.com/DevRedious/heroui-pro-tokens-redesign">DevRedious/heroui-pro-tokens-redesign</a><br>
+    <sub>An independent proposal. Not affiliated with, nor endorsed by, HeroUI.</sub>
+  </p>
+</div>
+
+---
 
 ![Today's CI/CD section next to the proposed one](docs/before-after.png)
 
