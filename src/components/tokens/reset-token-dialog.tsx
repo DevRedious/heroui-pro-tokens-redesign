@@ -52,8 +52,8 @@ export function ResetTokenDialog({
                     A new secret is issued immediately and the current one stops working.{" "}
                     {impact}
                   </p>
-                  {/* The tinted row keeps the unchecked control readable on the
-                      dialog surface, where field and overlay share a tone. */}
+                  {/* The dark theme keeps field and overlay tones close, so the
+                      row is tinted to keep the unchecked control readable. */}
                   <div className="rounded-2xl bg-surface-secondary px-4 py-3">
                     <Checkbox isSelected={isAcknowledged} onChange={setIsAcknowledged}>
                       <Checkbox.Content>

@@ -83,12 +83,3 @@ Toast.
 
 No other UI dependency. Icons come from `@gravity-ui/icons`, except the GitHub
 and GitLab marks, which are inlined in `src/components/icons/provider-icons.tsx`.
-
-## One note on the theme
-
-In the dark theme, `--border-width-field` is `0px` and `--field-border` is
-transparent, so an unchecked Checkbox control sits at the same tone as an
-`overlay` surface and is effectively invisible inside a dialog. The
-acknowledgement row in `reset-token-dialog.tsx` is therefore placed on
-`bg-surface-secondary`. Worth a look on your side: on dialog surfaces, the
-control could carry a visible border by default.
