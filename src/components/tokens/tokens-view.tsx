@@ -91,7 +91,8 @@ export function TokensView() {
       repositoryIds,
     };
 
-    setTokens((current) => [...current, token]);
+    // Newest first: a token you just created has to be on screen, not on page eight.
+    setTokens((current) => [token, ...current]);
     toast(`${name} created`, { variant: "success" });
   };
 
